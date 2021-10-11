@@ -27,3 +27,4 @@ The easiest thing to do is to start at the beginning, and in this case that mean
 ## Choices
 
 * The product (or potentially products) purchased will be included in an order, this is now represented by the order object
+* Sub-systems will be stubbed out using Moq to ensure that the expected calls are being made
