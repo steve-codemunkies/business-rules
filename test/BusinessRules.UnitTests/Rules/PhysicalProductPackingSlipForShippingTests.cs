@@ -27,13 +27,16 @@ namespace BusinessRules.UnitTests.Rules
 
     public class PhysicalProductPackingSlipForShipping : IRuleStrategy
     {
-        public PhysicalProductPackingSlipForShipping(IShipping @object)
+        private readonly IShipping _shipping;
+
+        public PhysicalProductPackingSlipForShipping(IShipping shipping)
         {
+            this._shipping = shipping;
         }
 
         public void ApplyRule(PackingSlip packingSlip)
         {
-            throw new System.NotImplementedException();
+            _shipping.ShipIt(packingSlip);
         }
     }
 }
