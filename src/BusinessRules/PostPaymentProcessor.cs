@@ -1,36 +1,25 @@
+using System.Collections.Generic;
 using BusinessRules.Entities;
-using BusinessRules.External;
+using BusinessRules.Rules;
 
 namespace BusinessRules
 {
     public class PostPaymentProcessor
     {
-        private readonly IShipping _shipping;
-        private readonly IRoyaltyDepartment _royaltyDepartment;
-        private readonly IMemberServices _memberServices;
+        private readonly IEnumerable<IRuleStrategy> _ruleStrategies;
 
-        public PostPaymentProcessor(IShipping shipping, IRoyaltyDepartment royaltyDepartment, IMemberServices memberServices)
+        public PostPaymentProcessor(IEnumerable<IRuleStrategy> ruleStrategies)
         {
-            _shipping = shipping;
-            _royaltyDepartment = royaltyDepartment;
-            _memberServices = memberServices;
+            _ruleStrategies = ruleStrategies;
         }
 
         public void Process(Order order)
         {
-            if (order.Product is PhysicalProduct)
-            {
-                _shipping.ShipIt(new PackingSlip { Product = order.Product });
+            var packingSlip = new PackingSlip { Product = order.Product };
 
-                if (order.Product is BookProduct)
-                {
-                    _royaltyDepartment.ProcessRoyalties(new PackingSlip { Product = order.Product });
-                }
-            }
-            
-            if (order.Product is Membership membership)
+            foreach(var strategy in _ruleStrategies)
             {
-                _memberServices.Activate(membership);
+                strategy.ApplyRule(packingSlip);
             }
         }
     }
