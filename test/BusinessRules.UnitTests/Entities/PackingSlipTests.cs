@@ -34,5 +34,19 @@ namespace BusinessRules.UnitTests.Entities
             // Assert
             result.Should().BeTrue();
         }
+
+        [Fact]
+        public void GivenAPackingSlip_WhenThereIsOneItem_ThenIsTypePresentCorrectlyRespondsForUnrelatedType()
+        {
+            // Arrange
+            var productList = new List<BaseProduct> { new Membership() };
+            var subject = new PackingSlip { Product = productList.AsReadOnly() };
+
+            // Act
+            var result = subject.ContainsProductType<PhysicalProduct>();
+
+            // Assert
+            result.Should().BeFalse();
+        }
     }
 }
