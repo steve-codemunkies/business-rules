@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{183A2DE2-7EF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRules", "src\BusinessRules\BusinessRules.csproj", "{FB949395-F0A3-41E6-9B84-0872D168E2F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F115A167-BA3E-41EC-B0F2-1824FFE02F46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRules.Integration", "test\BusinessRules.Integration\BusinessRules.Integration.csproj", "{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{FB949395-F0A3-41E6-9B84-0872D168E2F4}.Release|x64.Build.0 = Release|Any CPU
 		{FB949395-F0A3-41E6-9B84-0872D168E2F4}.Release|x86.ActiveCfg = Release|Any CPU
 		{FB949395-F0A3-41E6-9B84-0872D168E2F4}.Release|x86.Build.0 = Release|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Debug|x64.Build.0 = Debug|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Debug|x86.Build.0 = Debug|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Release|x64.ActiveCfg = Release|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Release|x64.Build.0 = Release|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FB949395-F0A3-41E6-9B84-0872D168E2F4} = {183A2DE2-7EF8-41DB-8B42-FE047447587A}
+		{7A2A31EE-A4A9-4232-AD73-8E6BFD80E11B} = {F115A167-BA3E-41EC-B0F2-1824FFE02F46}
 	EndGlobalSection
 EndGlobal
