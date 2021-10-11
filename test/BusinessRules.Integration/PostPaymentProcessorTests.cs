@@ -20,7 +20,11 @@ namespace BusinessRules.Integration
                 new PhysicalProductPackingSlipForShipping(shipping)
             };
 
-            var packingSlipFactory = new PackingSlipFactory(new ICreationStrategy[0]);
+            var creationStrategies = new ICreationStrategy[]
+            {
+                new SkiingVideoCreationStrategy()
+            };
+            var packingSlipFactory = new PackingSlipFactory(creationStrategies);
 
             return new PostPaymentProcessor(ruleStrategies, packingSlipFactory);
         }

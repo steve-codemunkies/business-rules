@@ -1,6 +1,6 @@
 namespace BusinessRules.Entities
 {
-    public class VideoProduct : BaseProduct
+    public class VideoProduct : PhysicalProduct
     {
         public string Title { get; init; }
     }
