@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
@@ -64,13 +63,15 @@ namespace BusinessRules.Integration
 
     public class PostPaymentProcessor
     {
+        private readonly IShipping _shipping;
         public PostPaymentProcessor(IShipping shipping)
         {
+            _shipping = shipping;
         }
 
         public void Process(Order order)
         {
-            throw new NotImplementedException();
+            _shipping.ShipIt(new PackingSlip(order.Products));
         }
     }
 }
