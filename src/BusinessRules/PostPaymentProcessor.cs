@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BusinessRules.Entities;
 using BusinessRules.Rules;
@@ -10,7 +11,7 @@ namespace BusinessRules
 
         public PostPaymentProcessor(IEnumerable<IRuleStrategy> ruleStrategies)
         {
-            _ruleStrategies = ruleStrategies;
+            _ruleStrategies = ruleStrategies ?? throw new ArgumentNullException(nameof(ruleStrategies));
         }
 
         public void Process(Order order)
