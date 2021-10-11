@@ -14,13 +14,12 @@ namespace BusinessRules
         public PostPaymentProcessor(IEnumerable<IRuleStrategy> ruleStrategies, IPackingSlipFactory packingSlipFactory)
         {
             _ruleStrategies = ruleStrategies ?? throw new ArgumentNullException(nameof(ruleStrategies));
-            _packingSlipFactory = packingSlipFactory;
+            _packingSlipFactory = packingSlipFactory ?? throw new ArgumentNullException(nameof(packingSlipFactory));
         }
 
         public void Process(Order order)
         {
-            var productList = new List<BaseProduct>(new[] { order.Product });
-            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
+            var packingSlip = _packingSlipFactory.BuildPackingSlip(order);
 
             foreach(var strategy in _ruleStrategies)
             {
