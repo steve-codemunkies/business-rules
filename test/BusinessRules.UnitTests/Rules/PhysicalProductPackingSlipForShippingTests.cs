@@ -68,6 +68,11 @@ namespace BusinessRules.UnitTests.Rules
 
         public void ApplyRule(PackingSlip packingSlip)
         {
+            if (packingSlip.Product is not PhysicalProduct)
+            {
+                return;
+            }
+            
             _shipping.ShipIt(packingSlip);
         }
     }
