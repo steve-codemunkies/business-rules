@@ -39,6 +39,22 @@ namespace BusinessRules.UnitTests.Rules
             // Assert
             shippingMock.Verify(s => s.ShipIt(packingSlip), Times.Once);
         }
+
+        [Fact]
+        public void GivenAPackingSlipToProcess_WhenTheSlipContainsAMembership_ThenTheShippingDepartmentIsNotCalled()
+        {
+            // Arrange
+            var shippingMock = new Mock<IShipping>();
+            IRuleStrategy subject = new PhysicalProductPackingSlipForShipping(shippingMock.Object);
+
+            var packingSlip = new PackingSlip { Product = new Membership() };
+
+            // Act
+            subject.ApplyRule(packingSlip);
+
+            // Assert
+            shippingMock.Verify(s => s.ShipIt(packingSlip), Times.Never);
+        }
     }
 
     public class PhysicalProductPackingSlipForShipping : IRuleStrategy
