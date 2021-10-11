@@ -27,13 +27,16 @@ namespace BusinessRules.UnitTests.Rules
 
     public class BookProductPackingSlipForRoyalties : IRuleStrategy
     {
-        public BookProductPackingSlipForRoyalties(IRoyaltyDepartment @object)
+        private readonly IRoyaltyDepartment _royaltyDepartment;
+
+        public BookProductPackingSlipForRoyalties(IRoyaltyDepartment royaltyDepartment)
         {
+            _royaltyDepartment = royaltyDepartment;
         }
 
         public void ApplyRule(PackingSlip packingSlip)
         {
-            throw new System.NotImplementedException();
+            _royaltyDepartment.ProcessRoyalties(packingSlip);
         }
     }
 }
