@@ -46,3 +46,9 @@ To a diagram that looks like the following:
 ![New product class relationship](/media/product-model-2.png)
 
 The activation of the membership will be represented on a new interface `IMemberServices`.
+
+## Refactor time!
+
+At this point the [`PostPaymentProcessor.Process`](https://github.com/steve-codemunkies/business-rules/blob/c784a9ad8be6371b25bf8234efba489b4ad51519/src/BusinessRules/PostPaymentProcessor.cs#L19-L35) is a _bit of a mess_. And this will not do. It's time to refactor.
+
+We now have three rules implemented, two of the rules run in a specific (but different) situation, while the other rule runs in two situations. At this point this looks like something we could implement with the [strategy pattern](https://www.oodesign.com/strategy-pattern.html). We'll do this by initially introducing a new `IRuleStrategy` interface, then re-implementing (with tests) the existing rules. The final step is to modify `PostPaymentProcessor.Process` to use the new strategies.
