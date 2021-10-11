@@ -4,6 +4,6 @@ namespace BusinessRules.Entities
 {
     public class PackingSlip
     {
-        public BaseProduct Product { get; init; }
+        public IReadOnlyList<BaseProduct> Product { get; init; }
     }
 }

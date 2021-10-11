@@ -41,7 +41,7 @@ namespace BusinessRules.Integration
             subject.Process(order);
 
             // Assert
-            generatedPackingSlip.Product.Should().Be(physicalProduct);
+            generatedPackingSlip.Product.Should().BeEquivalentTo(new[] { physicalProduct });
             royaltyDepartmentMock.Verify(rd => rd.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
             memberServicesMock.Verify(ms => ms.Activate(It.IsAny<Membership>()), Times.Never);
         }
@@ -69,8 +69,8 @@ namespace BusinessRules.Integration
             subject.Process(order);
 
             // Assert
-            shippingPackingSlip.Product.Should().Be(bookProduct);
-            royaltyPackingSlip.Product.Should().Be(bookProduct);
+            shippingPackingSlip.Product.Should().BeEquivalentTo(new[] { bookProduct });
+            royaltyPackingSlip.Product.Should().BeEquivalentTo(new[] { bookProduct });
             memberServicesMock.Verify(ms => ms.Activate(It.IsAny<Membership>()), Times.Never);
         }
 

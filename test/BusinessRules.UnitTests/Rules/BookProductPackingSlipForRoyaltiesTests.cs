@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BusinessRules.Entities;
 using BusinessRules.External;
 using BusinessRules.Rules;
@@ -15,7 +16,8 @@ namespace BusinessRules.UnitTests.Rules
             var royaltiesDepartmentMock = new Mock<IRoyaltyDepartment>();
             IRuleStrategy subject = new BookProductPackingSlipForRoyalties(royaltiesDepartmentMock.Object);
 
-            var packingSlip = new PackingSlip { Product = new BookProduct() };
+            var productList = new List<BaseProduct> { new BookProduct() };
+            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             // Act
             subject.ApplyRule(packingSlip);
@@ -31,7 +33,8 @@ namespace BusinessRules.UnitTests.Rules
             var royaltiesDepartmentMock = new Mock<IRoyaltyDepartment>();
             IRuleStrategy subject = new BookProductPackingSlipForRoyalties(royaltiesDepartmentMock.Object);
 
-            var packingSlip = new PackingSlip { Product = new PhysicalProduct() };
+            var productList = new List<BaseProduct> { new PhysicalProduct() };
+            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             // Act
             subject.ApplyRule(packingSlip);
@@ -47,7 +50,8 @@ namespace BusinessRules.UnitTests.Rules
             var royaltiesDepartmentMock = new Mock<IRoyaltyDepartment>();
             IRuleStrategy subject = new BookProductPackingSlipForRoyalties(royaltiesDepartmentMock.Object);
 
-            var packingSlip = new PackingSlip { Product = new Membership() };
+            var productList = new List<BaseProduct> { new Membership() };
+            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             // Act
             subject.ApplyRule(packingSlip);

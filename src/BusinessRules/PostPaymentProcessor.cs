@@ -16,7 +16,8 @@ namespace BusinessRules
 
         public void Process(Order order)
         {
-            var packingSlip = new PackingSlip { Product = order.Product };
+            var productList = new List<BaseProduct>(new[] { order.Product });
+            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             foreach(var strategy in _ruleStrategies)
             {

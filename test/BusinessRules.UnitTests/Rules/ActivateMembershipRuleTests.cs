@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BusinessRules.Entities;
 using BusinessRules.External;
 using BusinessRules.Rules;
@@ -16,7 +17,8 @@ namespace BusinessRules.UnitTests.Rules
             var membershipServicesMock = new Mock<IMemberServices>();
             IRuleStrategy subject = new ActivateMembershipRule(membershipServicesMock.Object);
 
-            var packingSlip = new PackingSlip { Product = new Membership() };
+            var productList = new List<BaseProduct> { new Membership() };
+            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             // Act
             subject.ApplyRule(packingSlip);
@@ -32,7 +34,8 @@ namespace BusinessRules.UnitTests.Rules
             var membershipServicesMock = new Mock<IMemberServices>();
             IRuleStrategy subject = new ActivateMembershipRule(membershipServicesMock.Object);
 
-            var packingSlip = new PackingSlip { Product = new PhysicalProduct() };
+            var productList = new List<BaseProduct> { new PhysicalProduct() };
+            var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             // Act
             subject.ApplyRule(packingSlip);
