@@ -47,7 +47,7 @@ To a diagram that looks like the following:
 
 The activation of the membership will be represented on a new interface `IMemberServices`.
 
-## Refactor time!
+## Refactor time
 
 At this point the [`PostPaymentProcessor.Process`](https://github.com/steve-codemunkies/business-rules/blob/c784a9ad8be6371b25bf8234efba489b4ad51519/src/BusinessRules/PostPaymentProcessor.cs#L19-L35) is a _bit of a mess_. And this will not do. It's time to refactor.
 
