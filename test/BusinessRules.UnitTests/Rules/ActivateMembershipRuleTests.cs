@@ -41,22 +41,4 @@ namespace BusinessRules.UnitTests.Rules
             membershipServicesMock.Verify(s => s.Activate(It.IsAny<Membership>()), Times.Never);
         }
     }
-
-    public class ActivateMembershipRule : IRuleStrategy
-    {
-        private readonly IMemberServices _memberServices;
-
-        public ActivateMembershipRule(IMemberServices memberServices)
-        {
-            _memberServices = memberServices;
-        }
-
-        public void ApplyRule(PackingSlip packingSlip)
-        {
-            if (packingSlip.Product is Membership membership)
-            {
-                _memberServices.Activate(membership);
-            };
-        }
-    }
 }
