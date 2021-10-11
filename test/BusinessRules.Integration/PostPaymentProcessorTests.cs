@@ -21,13 +21,13 @@ namespace BusinessRules.Integration
                 .Callback((PackingSlip ps) => generatedPackingSlip = ps);
 
             var physicalProduct = new PhysicalProduct();
-            var order = new Order(new[] { physicalProduct });
+            var order = new Order { Product = physicalProduct };
 
             // Act
             subject.Process(order);
 
             // Assert
-            generatedPackingSlip.Products.Should().BeEquivalentTo(new[] { physicalProduct });
+            generatedPackingSlip.Product.Should().Be(physicalProduct);
             royaltyDepartmentMock.Verify(rd => rd.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
         }
 
@@ -47,14 +47,14 @@ namespace BusinessRules.Integration
                 .Callback((PackingSlip ps) => royaltyPackingSlip = ps);
 
             var bookProduct = new BookProduct();
-            var order = new Order(new[] { bookProduct });
+            var order = new Order { Product = bookProduct };
 
             // Act
             subject.Process(order);
 
             // Assert
-            shippingPackingSlip.Products.Should().BeEquivalentTo(new[] { bookProduct });
-            royaltyPackingSlip.Products.Should().BeEquivalentTo(new[] { bookProduct });
+            shippingPackingSlip.Product.Should().Be(bookProduct);
+            royaltyPackingSlip.Product.Should().Be(bookProduct);
         }
     }
 

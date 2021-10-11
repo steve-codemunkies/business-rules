@@ -16,8 +16,8 @@ namespace BusinessRules
 
         public void Process(Order order)
         {
-            _shipping.ShipIt(new PackingSlip(order.Products));
-            _royaltyDepartment.ProcessRoyalties(new PackingSlip(order.Products));
+            _shipping.ShipIt(new PackingSlip { Product = order.Product });
+            _royaltyDepartment.ProcessRoyalties(new PackingSlip { Product = order.Product });
         }
     }
 }
