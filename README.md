@@ -23,3 +23,7 @@ The easiest thing to do is to start at the beginning, and in this case that mean
 * The payment has been completed successfully
 * The product and packing slip represent data to be transported
 * The shipping department/application can be represented by a class for the purposes of this kata
+
+## Choices
+
+* The product (or potentially products) purchased will be included in an order, this is now represented by the order object
