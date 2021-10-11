@@ -52,3 +52,9 @@ The activation of the membership will be represented on a new interface `IMember
 At this point the [`PostPaymentProcessor.Process`](https://github.com/steve-codemunkies/business-rules/blob/c784a9ad8be6371b25bf8234efba489b4ad51519/src/BusinessRules/PostPaymentProcessor.cs#L19-L35) is a _bit of a mess_. And this will not do. It's time to refactor.
 
 We now have three rules implemented, two of the rules run in a specific (but different) situation, while the other rule runs in two situations. At this point this looks like something we could implement with the [strategy pattern](https://www.oodesign.com/strategy-pattern.html). We'll do this by initially introducing a new `IRuleStrategy` interface, then re-implementing (with tests) the existing rules. The final step is to modify `PostPaymentProcessor.Process` to use the new strategies.
+
+## Step 4 (skipping ahead)
+
+The last important rule (listed) that will impact the design of the system is the 'If the payment is for the video “Learning to Ski,” add a free “First Aid” video to the packing slip (the result of a court decision in 1997).' rule. It seems the best way to implement this would be to change [`PostPaymentProcessor.Process`](https://github.com/steve-codemunkies/business-rules/blob/df2f606aafc0c8044028e6fa6fbd5156ea9d6a2a/src/BusinessRules/PostPaymentProcessor.cs#L18) to use a [factory](https://www.oodesign.com/factory-pattern.html), rather than just `new`ing up a `PackingSlip`.
+
+There's no reason we can't also implement a strategy in there as well, which is what we'll do 😀.
