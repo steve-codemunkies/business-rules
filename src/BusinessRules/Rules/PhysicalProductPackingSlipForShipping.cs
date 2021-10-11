@@ -1,6 +1,5 @@
 using BusinessRules.Entities;
 using BusinessRules.External;
-using BusinessRules.Rules;
 
 namespace BusinessRules.Rules
 {
@@ -10,7 +9,7 @@ namespace BusinessRules.Rules
 
         public PhysicalProductPackingSlipForShipping(IShipping shipping)
         {
-            this._shipping = shipping;
+            _shipping = shipping;
         }
 
         public void ApplyRule(PackingSlip packingSlip)
