@@ -37,7 +37,23 @@ namespace BusinessRules.UnitTests.Rules
             subject.ApplyRule(packingSlip);
 
             // Assert
-            royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(packingSlip), Times.Never);
+            royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
+        }
+
+        [Fact]
+        public void GivenAPackingSlipToProcess_WhenTheSlipContainsAMembership_ThenTheRoyaltiesDepartmentIsNotCalled()
+        {
+            // Arrange
+            var royaltiesDepartmentMock = new Mock<IRoyaltyDepartment>();
+            IRuleStrategy subject = new BookProductPackingSlipForRoyalties(royaltiesDepartmentMock.Object);
+
+            var packingSlip = new PackingSlip { Product = new Membership() };
+
+            // Act
+            subject.ApplyRule(packingSlip);
+
+            // Assert
+            royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
         }
     }
 
