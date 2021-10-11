@@ -17,7 +17,11 @@ namespace BusinessRules
         public void Process(Order order)
         {
             _shipping.ShipIt(new PackingSlip { Product = order.Product });
-            _royaltyDepartment.ProcessRoyalties(new PackingSlip { Product = order.Product });
+
+            if (order.Product is BookProduct)
+            {
+                _royaltyDepartment.ProcessRoyalties(new PackingSlip { Product = order.Product });
+            }
         }
     }
 }

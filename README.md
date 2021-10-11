@@ -14,20 +14,23 @@ Design a new system which can handle these rules and yet open to extension to ne
 
 (See also: [codekata.com](http://codekata.com/kata/kata16-business-rules/))
 
-# Step 1
+## Step 1
 
 The easiest thing to do is to start at the beginning, and in this case that means the rule "If the payment is for a physical product, generate a packing slip for shipping.". Three things to be represented have been identified in this statement, the (completed?) payment, a product, a packing slip. Additionally another service/system/person has been identified - shipping.
 
-## Assumptions
+### Assumptions
 
 * The payment has been completed successfully
 * The product and packing slip represent data to be transported
 * The shipping department/application can be represented by a class for the purposes of this kata
 
-## Choices
+### Choices
 
 * The product (or potentially products) purchased will be included in an order, this is now represented by the order object
 * Sub-systems will be stubbed out using Moq to ensure that the expected calls are being made
 
-# Step 2
+## Step 2
+
 We've taken what can be the hardest step and started. Now we need to push forward, and implement the next rule "If the payment is for a book, create a duplicate packing slip for the royalty department.". Immediately a question is thrown up, is a Book a Physical product? Given that the requirements have come from the business, and they don't seem to be using arcane terminology it would be fair to assume that when we are dealing with a Book we are indeed also dealing with a Physical Product.
+
+The next step to getting both tests to pass is to put a simple discriminator in the processor, so that the Royalty Department is only called when the order is for a book.

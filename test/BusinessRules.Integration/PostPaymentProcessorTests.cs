@@ -57,11 +57,4 @@ namespace BusinessRules.Integration
             royaltyPackingSlip.Product.Should().Be(bookProduct);
         }
     }
-
-    public class BookProduct : PhysicalProduct
-    {
-        public BookProduct()
-        {
-        }
-    }
 }
