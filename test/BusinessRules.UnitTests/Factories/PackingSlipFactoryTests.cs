@@ -51,7 +51,8 @@ namespace BusinessRules.UnitTests.Factories
 
         public PackingSlip BuildPackingSlip(Order order)
         {
-            throw new NotImplementedException();
+            var products = new List<BaseProduct> { order.Product };
+            return new PackingSlip { Product = products.AsReadOnly() };
         }
     }
 
