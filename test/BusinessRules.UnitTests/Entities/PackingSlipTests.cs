@@ -20,5 +20,19 @@ namespace BusinessRules.UnitTests.Entities
             // Assert
             result.Should().BeTrue();
         }
+
+        [Fact]
+        public void GivenAPackingSlip_WhenThereIsOneItem_ThenIsTypePresentCorrectlyRespondsForParentType()
+        {
+            // Arrange
+            var productList = new List<BaseProduct> { new BookProduct() };
+            var subject = new PackingSlip { Product = productList.AsReadOnly() };
+
+            // Act
+            var result = subject.ContainsProductType<PhysicalProduct>();
+
+            // Assert
+            result.Should().BeTrue();
+        }
     }
 }
