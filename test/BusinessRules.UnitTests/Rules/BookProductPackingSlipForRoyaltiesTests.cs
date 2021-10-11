@@ -24,4 +24,16 @@ namespace BusinessRules.UnitTests.Rules
             royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(packingSlip), Times.Once);
         }
     }
+
+    public class BookProductPackingSlipForRoyalties : IRuleStrategy
+    {
+        public BookProductPackingSlipForRoyalties(IRoyaltyDepartment @object)
+        {
+        }
+
+        public void ApplyRule(PackingSlip packingSlip)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
