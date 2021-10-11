@@ -77,6 +77,12 @@ namespace BusinessRules.UnitTests.Factories
         public PackingSlip BuildPackingSlip(Order order)
         {
             var products = new List<BaseProduct> { order.Product };
+
+            foreach(var strategy in _creationStrategies)
+            {
+                strategy.Apply(products);
+            }
+
             return new PackingSlip { Product = products.AsReadOnly() };
         }
     }
