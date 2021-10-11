@@ -40,6 +40,21 @@ namespace BusinessRules.UnitTests.Factories
             // Assert
             products.Count.Should().Be(1);
         }
+
+        [Fact]
+        public void GivenAProductList_WhenThereAreNoVideos_ThenNoVideoIsAdded()
+        {
+            // Arrange
+            ICreationStrategy subject = new SkiingVideoCreationStrategy();
+
+            var products = new List<BaseProduct> { new BookProduct() };
+
+            // Act
+            subject.Apply(products);
+
+            // Assert
+            products.Count.Should().Be(1);
+        }
     }
 
     internal class VideoProduct : BaseProduct
