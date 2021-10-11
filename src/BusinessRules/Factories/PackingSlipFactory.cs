@@ -6,7 +6,7 @@ namespace BusinessRules.Factories
 {
     public class PackingSlipFactory : IPackingSlipFactory
     {
-        private IEnumerable<ICreationStrategy> _creationStrategies;
+        private readonly IEnumerable<ICreationStrategy> _creationStrategies;
 
         public PackingSlipFactory(IEnumerable<ICreationStrategy> creationStrategies)
         {
