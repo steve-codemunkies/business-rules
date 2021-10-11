@@ -44,3 +44,5 @@ The next rule "If the payment is for a membership, activate that membership." in
 To a diagram that looks like the following:
 
 ![New product class relationship](/media/product-model-2.png)
+
+The activation of the membership will be represented on a new interface `IMemberServices`.

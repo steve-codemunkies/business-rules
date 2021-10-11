@@ -14,6 +14,7 @@ namespace BusinessRules.Integration
             // Arrange
             var shippingMock = new Mock<IShipping>();
             var royaltyDepartmentMock = new Mock<IRoyaltyDepartment>();
+            var memberServicesMock = new Mock<IMemberServices>();
             var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object);
 
             PackingSlip generatedPackingSlip = null;
@@ -29,6 +30,7 @@ namespace BusinessRules.Integration
             // Assert
             generatedPackingSlip.Product.Should().Be(physicalProduct);
             royaltyDepartmentMock.Verify(rd => rd.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
+            memberServicesMock.Verify(ms => ms.Activate(It.IsAny<Membership>()), Times.Never);
         }
 
         [Fact]
@@ -37,6 +39,7 @@ namespace BusinessRules.Integration
             // Arrange
             var shippingMock = new Mock<IShipping>();
             var royaltyDepartmentMock = new Mock<IRoyaltyDepartment>();
+            var memberServicesMock = new Mock<IMemberServices>();
             var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object);
 
             PackingSlip shippingPackingSlip = null;
@@ -55,6 +58,28 @@ namespace BusinessRules.Integration
             // Assert
             shippingPackingSlip.Product.Should().Be(bookProduct);
             royaltyPackingSlip.Product.Should().Be(bookProduct);
+            memberServicesMock.Verify(ms => ms.Activate(It.IsAny<Membership>()), Times.Never);
+        }
+
+        [Fact]
+        public void GivenAPaymentHasBeenCompleted_WhenTheProductIsAMembership_ThenTheMembershipIsActivated()
+        {
+            // Arrange
+            var shippingMock = new Mock<IShipping>();
+            var royaltyDepartmentMock = new Mock<IRoyaltyDepartment>();
+            var memberServicesMock = new Mock<IMemberServices>();
+            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object);
+
+            var membership = new Membership();
+            var order = new Order { Product = membership };
+
+            // Act
+            subject.Process(order);
+
+            // Assert
+            shippingMock.Verify(s => s.ShipIt(It.IsAny<PackingSlip>()), Times.Never);
+            royaltyDepartmentMock.Verify(rd => rd.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
+            memberServicesMock.Verify(ms => ms.Activate(membership), Times.Once);
         }
     }
 }
