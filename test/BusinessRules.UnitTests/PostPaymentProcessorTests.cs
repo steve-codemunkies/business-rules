@@ -34,15 +34,16 @@ namespace BusinessRules.UnitTests
             var ruleMock3 = new Mock<IRuleStrategy>();
             var subject = new PostPaymentProcessor(new[] { ruleMock1.Object, ruleMock2.Object, ruleMock3.Object });
 
+            var expectedPackingSlip = new PackingSlip();
             var order = new Order { Product = new TestProduct() };
 
             // Act
             subject.Process(order);
 
             // Assert
-            ruleMock1.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product.Contains(order.Product))), Times.Once);
-            ruleMock2.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product.Contains(order.Product))), Times.Once);
-            ruleMock3.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product.Contains(order.Product))), Times.Once);
+            ruleMock1.Verify(r => r.ApplyRule(expectedPackingSlip), Times.Once);
+            ruleMock2.Verify(r => r.ApplyRule(expectedPackingSlip), Times.Once);
+            ruleMock3.Verify(r => r.ApplyRule(expectedPackingSlip), Times.Once);
         }
     }
 }
