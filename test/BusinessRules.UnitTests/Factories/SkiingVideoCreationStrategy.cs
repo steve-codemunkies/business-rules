@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessRules.Entities;
 using BusinessRules.Factories;
 using FluentAssertions;
@@ -21,7 +23,20 @@ namespace BusinessRules.UnitTests.Factories
 
             // Assert
             products.Count.Should().Be(2);
-            products.Should().Contain(bp => bp is VideoProduct video && video.Title == "First Aid");
+            products.Should().Contain(bp => bp is VideoProduct && string.Compare(((VideoProduct)bp).Title, "First Aid", StringComparison.OrdinalIgnoreCase) == 0);
+        }
+    }
+
+    internal class VideoProduct : BaseProduct
+    {
+        public string Title { get; init; }
+    }
+
+    public class SkiingVideoCreationStrategy : ICreationStrategy
+    {
+        public void Apply(IList<BaseProduct> baseProducts)
+        {
+            baseProducts.Add(new VideoProduct { Title = "First Aid" });
         }
     }
 }
