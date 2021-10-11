@@ -63,6 +63,34 @@ namespace BusinessRules.UnitTests.Factories
             result.Product.Should().Contain(order.Product);
             result.Product.Should().Contain(extraProduct);
         }
+
+        [Fact]
+        public void GivenMultipleStrategies_WhenAnOrderIsProcessed_ThenAPackingSlipIsCreatedWithAllProducts()
+        {
+            // Arrange
+            var creationStrategyMock1 = new Mock<ICreationStrategy>();
+            var creationStrategyMock2 = new Mock<ICreationStrategy>();
+            var creationStrategyMock3 = new Mock<ICreationStrategy>();
+            IPackingSlipFactory subject = new PackingSlipFactory(new[] { creationStrategyMock1.Object, creationStrategyMock2.Object, creationStrategyMock3.Object });
+            var order = new Order { Product = new TestProduct() };
+
+            var extraProduct = new TestProduct();
+            creationStrategyMock2.Setup(cs => cs.Apply(It.IsAny<IList<BaseProduct>>()))
+                .Callback((IList<BaseProduct> baseProducts) => baseProducts.Add(extraProduct));
+
+            // Act
+            var result = subject.BuildPackingSlip(order);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.Product.Should().NotBeNullOrEmpty();
+            result.Product.Count.Should().Be(2);
+            result.Product.Should().Contain(order.Product);
+            result.Product.Should().Contain(extraProduct);
+
+            creationStrategyMock1.Verify(cs => cs.Apply(It.IsAny<IList<BaseProduct>>()), Times.Once);
+            creationStrategyMock3.Verify(cs => cs.Apply(It.IsAny<IList<BaseProduct>>()), Times.Once);
+        }
     }
 
     public class PackingSlipFactory : IPackingSlipFactory
