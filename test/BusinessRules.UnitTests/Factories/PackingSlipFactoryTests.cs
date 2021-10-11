@@ -92,31 +92,4 @@ namespace BusinessRules.UnitTests.Factories
             creationStrategyMock3.Verify(cs => cs.Apply(It.IsAny<IList<BaseProduct>>()), Times.Once);
         }
     }
-
-    public class PackingSlipFactory : IPackingSlipFactory
-    {
-        private IEnumerable<ICreationStrategy> _creationStrategies;
-
-        public PackingSlipFactory(IEnumerable<ICreationStrategy> creationStrategies)
-        {
-            _creationStrategies = creationStrategies ?? throw new ArgumentNullException(nameof(creationStrategies));
-        }
-
-        public PackingSlip BuildPackingSlip(Order order)
-        {
-            var products = new List<BaseProduct> { order.Product };
-
-            foreach(var strategy in _creationStrategies)
-            {
-                strategy.Apply(products);
-            }
-
-            return new PackingSlip { Product = products.AsReadOnly() };
-        }
-    }
-
-    public interface ICreationStrategy
-    {
-        void Apply(IList<BaseProduct> baseProducts);
-    }
 }
