@@ -4,7 +4,7 @@ namespace BusinessRules.Entities
 {
     public class Order
     {
-        public PhysicalProduct Product { get; init; }
+        public BaseProduct Product { get; init; }
 
     }
 }

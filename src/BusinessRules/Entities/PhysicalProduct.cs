@@ -1,6 +1,7 @@
 namespace BusinessRules.Entities
 {
-    public class PhysicalProduct
+
+    public class PhysicalProduct : BaseProduct
     {
         public PhysicalProduct()
         {
