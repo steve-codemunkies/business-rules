@@ -56,24 +56,4 @@ namespace BusinessRules.UnitTests.Rules
             shippingMock.Verify(s => s.ShipIt(packingSlip), Times.Never);
         }
     }
-
-    public class PhysicalProductPackingSlipForShipping : IRuleStrategy
-    {
-        private readonly IShipping _shipping;
-
-        public PhysicalProductPackingSlipForShipping(IShipping shipping)
-        {
-            this._shipping = shipping;
-        }
-
-        public void ApplyRule(PackingSlip packingSlip)
-        {
-            if (packingSlip.Product is not PhysicalProduct)
-            {
-                return;
-            }
-            
-            _shipping.ShipIt(packingSlip);
-        }
-    }
 }
