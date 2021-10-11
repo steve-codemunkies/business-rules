@@ -56,24 +56,4 @@ namespace BusinessRules.UnitTests.Rules
             royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(It.IsAny<PackingSlip>()), Times.Never);
         }
     }
-
-    public class BookProductPackingSlipForRoyalties : IRuleStrategy
-    {
-        private readonly IRoyaltyDepartment _royaltyDepartment;
-
-        public BookProductPackingSlipForRoyalties(IRoyaltyDepartment royaltyDepartment)
-        {
-            _royaltyDepartment = royaltyDepartment;
-        }
-
-        public void ApplyRule(PackingSlip packingSlip)
-        {
-            if(packingSlip.Product is not BookProduct)
-            {
-                return;
-            }
-
-            _royaltyDepartment.ProcessRoyalties(packingSlip);
-        }
-    }
 }
