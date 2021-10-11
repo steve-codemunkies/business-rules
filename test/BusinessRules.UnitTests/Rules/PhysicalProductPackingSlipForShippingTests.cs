@@ -24,4 +24,16 @@ namespace BusinessRules.UnitTests.Rules
             shippingMock.Verify(s => s.ShipIt(packingSlip), Times.Once);
         }
     }
+
+    public class PhysicalProductPackingSlipForShipping : IRuleStrategy
+    {
+        public PhysicalProductPackingSlipForShipping(IShipping @object)
+        {
+        }
+
+        public void ApplyRule(PackingSlip packingSlip)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
