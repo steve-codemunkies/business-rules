@@ -17,14 +17,14 @@ namespace BusinessRules.UnitTests.Rules
             var membershipServicesMock = new Mock<IMemberServices>();
             IRuleStrategy subject = new ActivateMembershipRule(membershipServicesMock.Object);
 
-            var productList = new List<BaseProduct> { new Membership() };
+            var productList = new List<Membership> { new Membership() };
             var packingSlip = new PackingSlip { Product = productList.AsReadOnly() };
 
             // Act
             subject.ApplyRule(packingSlip);
 
             // Assert
-            membershipServicesMock.Verify(s => s.Activate((Membership)packingSlip.Product), Times.Once);
+            membershipServicesMock.Verify(s => s.Activate(productList[0]), Times.Once);
         }
 
         [Fact]

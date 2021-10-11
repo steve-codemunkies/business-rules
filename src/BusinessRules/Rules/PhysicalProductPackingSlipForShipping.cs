@@ -14,7 +14,7 @@ namespace BusinessRules.Rules
 
         public void ApplyRule(PackingSlip packingSlip)
         {
-            if (packingSlip.Product is not PhysicalProduct)
+            if (!packingSlip.ContainsProductType<PhysicalProduct>())
             {
                 return;
             }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BusinessRules.Entities;
 using BusinessRules.Rules;
 using FluentAssertions;
@@ -39,9 +40,9 @@ namespace BusinessRules.UnitTests
             subject.Process(order);
 
             // Assert
-            ruleMock1.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product == order.Product)), Times.Once);
-            ruleMock2.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product == order.Product)), Times.Once);
-            ruleMock3.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product == order.Product)), Times.Once);
+            ruleMock1.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product.Contains(order.Product))), Times.Once);
+            ruleMock2.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product.Contains(order.Product))), Times.Once);
+            ruleMock3.Verify(r => r.ApplyRule(It.Is<PackingSlip>(ps => ps.Product.Contains(order.Product))), Times.Once);
         }
     }
 }

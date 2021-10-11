@@ -1,3 +1,4 @@
+using System.Linq;
 using BusinessRules.Entities;
 using BusinessRules.External;
 
@@ -14,10 +15,12 @@ namespace BusinessRules.Rules
 
         public void ApplyRule(PackingSlip packingSlip)
         {
-            if (packingSlip.Product is Membership membership)
+            if(!packingSlip.ContainsProductType<Membership>())
             {
-                _memberServices.Activate(membership);
-            };
+                return;
+            }
+
+            _memberServices.Activate((Membership)packingSlip.Product.First(p => p is Membership));
         }
     }
 }
