@@ -28,13 +28,16 @@ namespace BusinessRules.UnitTests.Rules
 
     public class ActivateMembershipRule : IRuleStrategy
     {
-        public ActivateMembershipRule(IMemberServices @object)
+        private readonly IMemberServices _memberServices;
+
+        public ActivateMembershipRule(IMemberServices memberServices)
         {
+            _memberServices = memberServices;
         }
 
         public void ApplyRule(PackingSlip packingSlip)
         {
-            throw new System.NotImplementedException();
+            _memberServices.Activate((Membership)packingSlip.Product);
         }
     }
 }
