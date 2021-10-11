@@ -23,6 +23,22 @@ namespace BusinessRules.UnitTests.Rules
             // Assert
             royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(packingSlip), Times.Once);
         }
+
+        [Fact]
+        public void GivenAPackingSlipToProcess_WhenTheSlipContainsAPhysicalProduct_ThenTheRoyaltiesDepartmentIsNotCalled()
+        {
+            // Arrange
+            var royaltiesDepartmentMock = new Mock<IRoyaltyDepartment>();
+            IRuleStrategy subject = new BookProductPackingSlipForRoyalties(royaltiesDepartmentMock.Object);
+
+            var packingSlip = new PackingSlip { Product = new PhysicalProduct() };
+
+            // Act
+            subject.ApplyRule(packingSlip);
+
+            // Assert
+            royaltiesDepartmentMock.Verify(s => s.ProcessRoyalties(packingSlip), Times.Never);
+        }
     }
 
     public class BookProductPackingSlipForRoyalties : IRuleStrategy
