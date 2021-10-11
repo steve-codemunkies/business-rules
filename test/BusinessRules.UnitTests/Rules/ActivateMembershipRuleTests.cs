@@ -24,6 +24,22 @@ namespace BusinessRules.UnitTests.Rules
             // Assert
             membershipServicesMock.Verify(s => s.Activate((Membership)packingSlip.Product), Times.Once);
         }
+
+        [Fact]
+        public void GivenAPackingSlipToProcess_WhenTheSlipDoesNotContainsAMembership_ThenNoActionIsTaken()
+        {
+            // Arrange
+            var membershipServicesMock = new Mock<IMemberServices>();
+            IRuleStrategy subject = new ActivateMembershipRule(membershipServicesMock.Object);
+
+            var packingSlip = new PackingSlip { Product = new PhysicalProduct() };
+
+            // Act
+            subject.ApplyRule(packingSlip);
+
+            // Assert
+            membershipServicesMock.Verify(s => s.Activate(It.IsAny<Membership>()), Times.Never);
+        }
     }
 
     public class ActivateMembershipRule : IRuleStrategy
