@@ -53,7 +53,10 @@ namespace BusinessRules.UnitTests.Rules
 
         public void ApplyRule(PackingSlip packingSlip)
         {
-            _memberServices.Activate((Membership)packingSlip.Product);
+            if (packingSlip.Product is Membership membership)
+            {
+                _memberServices.Activate(membership);
+            };
         }
     }
 }
