@@ -15,7 +15,7 @@ namespace BusinessRules.Integration
             var shippingMock = new Mock<IShipping>();
             var royaltyDepartmentMock = new Mock<IRoyaltyDepartment>();
             var memberServicesMock = new Mock<IMemberServices>();
-            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object);
+            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object, memberServicesMock.Object);
 
             PackingSlip generatedPackingSlip = null;
             shippingMock.Setup(s => s.ShipIt(It.IsAny<PackingSlip>()))
@@ -40,7 +40,7 @@ namespace BusinessRules.Integration
             var shippingMock = new Mock<IShipping>();
             var royaltyDepartmentMock = new Mock<IRoyaltyDepartment>();
             var memberServicesMock = new Mock<IMemberServices>();
-            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object);
+            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object, memberServicesMock.Object);
 
             PackingSlip shippingPackingSlip = null;
             PackingSlip royaltyPackingSlip = null;
@@ -68,7 +68,7 @@ namespace BusinessRules.Integration
             var shippingMock = new Mock<IShipping>();
             var royaltyDepartmentMock = new Mock<IRoyaltyDepartment>();
             var memberServicesMock = new Mock<IMemberServices>();
-            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object);
+            var subject = new PostPaymentProcessor(shippingMock.Object, royaltyDepartmentMock.Object, memberServicesMock.Object);
 
             var membership = new Membership();
             var order = new Order { Product = membership };
