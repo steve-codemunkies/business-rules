@@ -6,9 +6,12 @@ namespace BusinessRules
     public class PostPaymentProcessor
     {
         private readonly IShipping _shipping;
-        public PostPaymentProcessor(IShipping shipping)
+        private readonly IRoyaltyDepartment _royaltyDepartment;
+
+        public PostPaymentProcessor(IShipping shipping, IRoyaltyDepartment royaltyDepartment)
         {
             _shipping = shipping;
+            _royaltyDepartment = royaltyDepartment;
         }
 
         public void Process(Order order)
