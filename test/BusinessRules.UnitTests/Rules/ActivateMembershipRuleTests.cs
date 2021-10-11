@@ -22,7 +22,19 @@ namespace BusinessRules.UnitTests.Rules
             subject.ApplyRule(packingSlip);
 
             // Assert
-            membershipServicesMock.Verify(s => s.Activate(packingSlip), Times.Once);
+            membershipServicesMock.Verify(s => s.Activate((Membership)packingSlip.Product), Times.Once);
+        }
+    }
+
+    public class ActivateMembershipRule : IRuleStrategy
+    {
+        public ActivateMembershipRule(IMemberServices @object)
+        {
+        }
+
+        public void ApplyRule(PackingSlip packingSlip)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
