@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BusinessRules.Entities;
+using FluentAssertions;
 using Xunit;
 
 namespace BusinessRules.UnitTests.Entities
