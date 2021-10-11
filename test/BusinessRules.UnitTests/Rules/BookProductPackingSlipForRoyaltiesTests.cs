@@ -52,6 +52,11 @@ namespace BusinessRules.UnitTests.Rules
 
         public void ApplyRule(PackingSlip packingSlip)
         {
+            if(packingSlip.Product is not BookProduct)
+            {
+                return;
+            }
+
             _royaltyDepartment.ProcessRoyalties(packingSlip);
         }
     }
