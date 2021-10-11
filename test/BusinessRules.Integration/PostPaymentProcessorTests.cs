@@ -1,5 +1,6 @@
 using BusinessRules.Entities;
 using BusinessRules.External;
+using BusinessRules.Factories;
 using BusinessRules.Rules;
 using FluentAssertions;
 using Moq;
@@ -18,7 +19,9 @@ namespace BusinessRules.Integration
                 new PhysicalProductPackingSlipForShipping(shipping)
             };
 
-            return new PostPaymentProcessor(ruleStrategies);
+            var packingSlipFactory = new PackingSlipFactory(new ICreationStrategy[0]);
+
+            return new PostPaymentProcessor(ruleStrategies, packingSlipFactory);
         }
 
         [Fact]
